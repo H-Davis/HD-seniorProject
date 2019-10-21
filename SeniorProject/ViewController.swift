@@ -12,6 +12,8 @@ class ViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("Save button function goes here")
 
         // Do any additional setup after loading the view.
     }
