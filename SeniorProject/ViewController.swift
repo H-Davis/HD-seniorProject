@@ -7,13 +7,14 @@
 //
 
 import Cocoa
+import AppKit
 
 class ViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("Save button function goes here")
+        //print("Save button function goes here")
 
         // Do any additional setup after loading the view.
     }
@@ -23,7 +24,19 @@ class ViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
+    
+    
 
-
+    @IBAction func createFolder(_ sender: Any) {
+        let downloadsDirectory = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
+        let downloadsDirectoryWithFolder = downloadsDirectory.appendingPathComponent("Unsplash Images")
+        
+        do {
+            try FileManager.default.createDirectory(at: downloadsDirectoryWithFolder, withIntermediateDirectories: true, attributes: nil)
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+    }
+    
 }
 
