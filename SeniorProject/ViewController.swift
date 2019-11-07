@@ -10,12 +10,11 @@ import Cocoa
 import AppKit
 
 class ViewController: NSViewController {
-
+    
+    @IBOutlet weak var getParameters: NSTextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //print("Save button function goes here")
-
         // Do any additional setup after loading the view.
     }
 
@@ -25,11 +24,13 @@ class ViewController: NSViewController {
         }
     }
     
-    struct myVariables {
-        //global variables
+    
+    @IBAction func textFieldAction(_ sender: NSTextField) {
+        let textFieldString = getParameters.stringValue
+        
     }
     
-
+    
     @IBAction func createFolder(_ sender: Any) {
         let downloadsDirectory = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
         let downloadsDirectoryWithFolder = downloadsDirectory.appendingPathComponent("UnsplashImages")
@@ -49,7 +50,9 @@ class ViewController: NSViewController {
         let destinationFileUrl = downloadsUrl.appendingPathComponent(imagePath).appendingPathComponent("newImage.jpg")
         
         //Create URL to the source file you want to download
-        let fileURL = URL(string: "https://source.unsplash.com/featured/?,city")
+        let textFieldString = getParameters.stringValue
+        let origFileUrl = "https://source.unsplash.com/featured/?,"
+        let fileURL = URL(string: origFileUrl + textFieldString)
         
         let sessionConfig = URLSessionConfiguration.default
         let session = URLSession(configuration: sessionConfig)

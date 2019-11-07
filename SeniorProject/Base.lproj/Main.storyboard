@@ -726,6 +726,9 @@
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="textFieldAction:" target="XfG-lQ-9wD" id="sp3-zn-M8d"/>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W9e-BA-fwg">
                                 <rect key="frame" x="87" y="156" width="65" height="17"/>
@@ -816,6 +819,9 @@
                             </textField>
                         </subviews>
                     </view>
+                    <connections>
+                        <outlet property="getParameters" destination="xWr-wT-SI3" id="Mi0-7D-pw4"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
