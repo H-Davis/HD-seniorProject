@@ -807,6 +807,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="setAsBackground:" target="XfG-lQ-9wD" id="GeI-Zg-iEU"/>
+                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SIM-tE-5zP">
                                 <rect key="frame" x="87" y="195" width="60" height="17"/>
