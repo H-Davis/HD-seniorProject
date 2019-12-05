@@ -13,6 +13,14 @@ class SeniorProjectTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        super.setUp()
+        let app = XCUIApplication.self
+        //create location for the folder
+        let downloadsUrl =  FileManager.default.homeDirectoryForCurrentUser
+        let imagePath = "Downloads"
+        let photoLocation = downloadsUrl.appendingPathComponent(imagePath)
+        
+        
     }
 
     override func tearDown() {
@@ -23,6 +31,40 @@ class SeniorProjectTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
+    
+    func testNoFolderExists(){
+        //Assert that folder  doesn't exist
+        //XCTAssertNil(contentsOfDirectory(photoLocation))
+        
+    }
+    
+    func testFolderIsCreated(){
+        //create the folder
+        //untitledWindow.["create"].click()
+        //Assert that folder does exist
+        //XCTAssertNil(contentsOfDirectory(photoLocation))
+    }
+    
+    func testFolderHasOnePhoto(){
+        //create folder
+        //Assert that photo was in folder added on button click
+    }
+    
+    func testPhotoIsSetAsBackground(){
+        //create folder
+        //add photo
+        //Assert that photo was added as background on button click
+    }
+    
+    func testPhotoIsDeletedFromFolder(){
+        //create folder
+        //add photo
+        //Photo was added as background o button click
+        //Assert that photo was deleted from folder
+        
+    }
+    
+    
 
     func testPerformanceExample() {
         // This is an example of a performance test case.

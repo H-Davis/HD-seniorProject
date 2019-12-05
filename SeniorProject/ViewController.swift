@@ -12,10 +12,20 @@ import AppKit
 class ViewController: NSViewController {
     
     @IBOutlet weak var getParameters: NSTextField!
+    @IBOutlet weak var screenSize: NSTextField!
+    var schedule: Timer?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         //print("Save button function goes here")
         // Do any additional setup after loading the view.
+        
+        //schedule = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(setAutomatically), userInfo: nil, repeats: true)
+    }
+    
+    func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear()
+        schedule?.invalidate()
     }
 
     override var representedObject: Any? {
@@ -35,7 +45,7 @@ class ViewController: NSViewController {
         
         do {
             try FileManager.default.createDirectory(at: downloadsDirectoryWithFolder, withIntermediateDirectories: true, attributes: nil)
-        } catch let error as NSError {
+            } catch let error as NSError {
             print(error.localizedDescription)
         }
     }
@@ -47,10 +57,11 @@ class ViewController: NSViewController {
         let destinationFileUrl = downloadsUrl.appendingPathComponent(imagePath).appendingPathComponent("newImage.jpg")
         
         //Create URL to the source file you want to download
-        let textFieldString = getParameters.stringValue
-        let resolution = "/3840x2160"
-        let origFileUrl = "https://source.unsplash.com/featured/?"
-        let fileURL = URL(string: origFileUrl + textFieldString + resolution)
+        let textFieldString1 = getParameters.stringValue
+        let textFieldString2 = screenSize.stringValue
+        let origFileUrl = "https://source.unsplash.com/"
+        let slashQuestion = "/?"
+        let fileURL = URL(string: origFileUrl + textFieldString2 + slashQuestion + textFieldString1)
         
         let sessionConfig = URLSessionConfiguration.default
         let session = URLSession(configuration: sessionConfig)
@@ -116,7 +127,6 @@ class ViewController: NSViewController {
 //    let timer = Timer(fireAt: date, interval: 0, target: self, selector: #selector(setAsBackground(), userInfo: nil, repeats: false)
 //    RunLoop.main.add(timer, forMode: .common)
     
-    
     @IBAction func setAsBackground(_ sender: Any) {
         let downloadsUrl:URL =  FileManager.default.homeDirectoryForCurrentUser
         let imagePath = "Downloads/UnsplashImages/newImage.jpg"
@@ -127,7 +137,17 @@ class ViewController: NSViewController {
             try! workspace.setDesktopImageURL(photoLocation, for: i, options: [:])
         }
         perform(#selector(deleteImageFromFolder), with: nil, afterDelay: 2.0)
+        
     }
+    
+
+    
+    @objc func setAutomatically()
+    {
+        saveImage((Any).self)
+        setAsBackground((Any).self)
+    }
+    
 }
 
 

@@ -763,21 +763,6 @@
                                     </menu>
                                 </popUpButtonCell>
                             </popUpButton>
-                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g5x-kT-DcK">
-                                <rect key="frame" x="222" y="119" width="77" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <popUpButtonCell key="cell" type="push" title="UHD" alternateTitle="4k" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="PEs-yI-6SN" id="eva-7m-udK">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="DXs-bQ-XwO">
-                                        <items>
-                                            <menuItem title="FHD" id="c2m-ca-C5x"/>
-                                            <menuItem title="QHD" id="QRy-vT-6yX"/>
-                                            <menuItem title="UHD" state="on" id="PEs-yI-6SN"/>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
-                            </popUpButton>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uz6-eO-muc">
                                 <rect key="frame" x="151" y="80" width="123" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -820,10 +805,20 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70z-kP-lYY">
+                                <rect key="frame" x="172" y="121" width="223" height="22"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Enter screen's size (e.g. 1440x900)" drawsBackground="YES" id="6BU-H2-f9Y">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="getParameters" destination="xWr-wT-SI3" id="Mi0-7D-pw4"/>
+                        <outlet property="screenSize" destination="70z-kP-lYY" id="kVN-lG-4J9"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
