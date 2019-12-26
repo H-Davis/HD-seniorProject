@@ -14,11 +14,10 @@ class SeniorProjectTests: XCTestCase {
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         super.setUp()
-        let app = XCUIApplication.self
         //create location for the folder
-        let downloadsUrl =  FileManager.default.homeDirectoryForCurrentUser
-        let imagePath = "Downloads"
-        let photoLocation = downloadsUrl.appendingPathComponent(imagePath)
+//        let downloadsUrl =  FileManager.default.homeDirectoryForCurrentUser
+//        let imagePath = "Downloads"
+//        let photoLocation = downloadsUrl.appendingPathComponent(imagePath)
         
         
     }
@@ -33,14 +32,20 @@ class SeniorProjectTests: XCTestCase {
     }
     
     func testNoFolderExists(){
+        let fileManager = FileManager.default
+        let downloadsDirectory = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
+        let downloadsDirectoryString = downloadsDirectory.path
         //Assert that folder  doesn't exist
-        //XCTAssertNil(contentsOfDirectory(photoLocation))
+        XCTAssertFalse(fileManager.fileExists(atPath: downloadsDirectoryString))
         
     }
     
     func testFolderIsCreated(){
+        let downloadsDirectory = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
+        let fileManager = FileManager.default
+        let downloadsDirectoryString = downloadsDirectory.path
         //create the folder
-        //untitledWindow.["create"].click()
+                //untitledWindow.["create"].click()
         //Assert that folder does exist
         //XCTAssertNil(contentsOfDirectory(photoLocation))
     }

@@ -17,13 +17,7 @@ class SeniorProjectUITests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        let app = XCUIApplication.self
-        let app = XCUIApplication.self
-        //create location for the folder
-        let downloadsUrl =  FileManager.default.homeDirectoryForCurrentUser
-        let imagePath = "Downloads"
-        let photoLocation = downloadsUrl.appendingPathComponent(imagePath)
-
+        super.setUp()
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
 
@@ -39,23 +33,42 @@ class SeniorProjectUITests: XCTestCase {
         
         super.tearDown()
     }
+    
+    /// UI Elements and Actions
 
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+//    let window = XCUIApplication().windows["Window"]
+//    let separateListByCommaEGCityBostonTextField = window.textFields["Separate list by comma(e.g. city,boston)"]
+//    separateListByCommaEGCityBostonTextField.click()
+//    separateListByCommaEGCityBostonTextField.typeText("tree")
+//
+//    let enterScreenSSizeEG1440x900TextField = window.textFields["Enter screen's size (e.g. 1440x900)"]
+//    enterScreenSSizeEG1440x900TextField.click()
+//    enterScreenSSizeEG1440x900TextField.typeText("1440x900")
+//    window.buttons["Save Image"].click()
+//    window.buttons["Apply"].click()
+//    window.buttons[XCUIIdentifierCloseWindow].click()
     
     func testFolderIsCreatedOnClick(){
-        testFolderIsCreated(){
-            //create the folder
-            untitledWindow.["create"].click()
-            //Assert that folder does exist
-            XCTAssertNil(contentsOfDirectory(photoLocation))
+        //setup
+        let window = XCUIApplication().windows["Window"]
+        let fileManager = FileManager.default
+        let downloadsDirectory = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
+        let downloadsDirectoryString = downloadsDirectory.path
+        //create folder
+        window.buttons["Create Folder"].click()
+        //Assert that folder  was added on button click
+        XCTAssertTrue(fileManager.fileExists(atPath: downloadsDirectoryString))
     }
     
-    func testFolderHasOnePhotoOnClcik(){
-        //create folder
-        //Assert that photo was in folder added on button click
+    func testFolderHasOnePhotoOnClick(){
+//        let window = XCUIApplication().windows["Window"]
+//        let fileManager = FileManager.default
+//        let downloadsDirectory = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
+//        let downloadsDirectoryString = downloadsDirectory.path
+//        //create folder
+//        window.buttons["Create Folder"].click()
+//        //Assert that photo was in folder added on button click
+//        XCTAssertEqual(downloadsDirectoryString, "UnsplashImages")
     }
     
     func testPhotoIsSetAsBackgroundOnClick(){
@@ -64,9 +77,9 @@ class SeniorProjectUITests: XCTestCase {
         //Assert that photo was added as background on button click
     }
     
-    func testPhotoIsDeletedFromFolder(){
+   
         
-        func testPhotoIsDeletedFromFolder(){
+    func testPhotoIsDeletedFromFolder(){
             //create folder
             //add photo
             //Photo was added as background o button click
