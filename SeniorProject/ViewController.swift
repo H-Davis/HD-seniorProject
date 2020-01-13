@@ -12,23 +12,24 @@ import AppKit
 class ViewController: NSViewController {
     @IBOutlet weak var txt_keywords: NSTextField!
     @IBOutlet weak var chk_saveWallpapers: NSButton!
-    var wallpaperTimer: Timer?
+    @IBOutlet weak var scheduleAmount: NSTextField!
+    var wallpaperTimer = Timer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.timerSetter()
     }
     
     func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear()
+        wallpaperTimer.invalidate()
     }
     
-    @IBAction func apply(_ sender: Any) {
+    @IBAction @objc func apply(_ sender: Any) {
         let rootPath = (chk_saveWallpapers.state == .on) ? self.getSaveLocation() : self.getTempLocation();
-        
         self.retrieveImage(imagePath: rootPath) { result in
             self.setAsBackground(imagePath: result)
         }
-        
     }
     
     func getTempLocation() -> URL? {
@@ -105,17 +106,33 @@ class ViewController: NSViewController {
             print("Unable to set background!")
         }
     }
-  
-//    func createFolder() {
-//        let downloadsDirectory = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
-//        let downloadsDirectoryWithFolder = downloadsDirectory.appendingPathComponent("UnsplashImages")
-//
-//        do {
-//            try FileManager.default.createDirectory(at: downloadsDirectoryWithFolder, withIntermediateDirectories: true, attributes: nil)
-//        } catch let error as NSError {
-//            print(error.localizedDescription)
-//        }
-//    }
+    
+    func timerSetter(){
+        wallpaperTimer = Timer.scheduledTimer(timeInterval: TimeInterval(setSchedule(scheduleAmount: scheduleAmount)), target: self, selector: #selector(apply(_:)), userInfo: nil, repeats: true)
+    }
+    
+    func setSchedule(scheduleAmount: NSTextField) -> Int {
+        let numString = scheduleAmount.stringValue as NSString
+        let num = numString.doubleValue
+        return Int(num)
+    }
+    
+    
+    
+    /*func createFolder() {
+        let downloadsDirectory = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
+        let downloadsDirectoryWithFolder = downloadsDirectory.appendingPathComponent("UnsplashImages")
+
+        do {
+            try FileManager.default.createDirectory(at: downloadsDirectoryWithFolder, withIntermediateDirectories: true, attributes: nil)
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+    }
+    */
+    //    wallpaperTimer = Timer.scheduledTimer(timeInterval: TimeInterval(setSchedule(scheduledTimed: scheduledTimed)), target: self, selector: #selector(apply(_:)), userInfo: nil, repeats: true)
+    
+    
 }
 
 
