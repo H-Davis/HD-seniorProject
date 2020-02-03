@@ -58,7 +58,7 @@ class SeniorProjectUITests: XCTestCase {
     func testFolderExists(){
         let downloadsDirectory = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
         let downloadsDirectoryWithFolder = downloadsDirectory.appendingPathComponent("UglyWallpapers")
-        XCTAssertTrue(fileExists(atPath: downloadsDirectoryWithFolder))
+        XCTAssertTrue(FileManager.fileExists(atPath: downloadsDirectoryWithFolder))
     }
     
     func testPhotoIsSaved(){
