@@ -764,20 +764,33 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eoD-Q1-fUd">
-                                <rect key="frame" x="107" y="106" width="380" height="22"/>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ilS-h4-Qr6">
+                                <rect key="frame" x="105" y="104" width="385" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Enter # of minutes" drawsBackground="YES" id="Mfo-cB-XOq">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                                <popUpButtonCell key="cell" type="push" title="1min" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" allowsMixedState="YES" imageScaling="proportionallyDown" inset="2" autoenablesItems="NO" selectedItem="HC2-9t-RZk" id="nad-p2-w9R">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" autoenablesItems="NO" id="D04-CP-tXk">
+                                        <items>
+                                            <menuItem title="30sec" state="on" id="mdv-lM-bvK"/>
+                                            <menuItem title="1min" state="on" id="HC2-9t-RZk"/>
+                                            <menuItem title="5min" state="mixed" id="OfI-nb-gHs">
+                                                <connections>
+                                                    <action selector="fiveMin:" target="2jm-O7-Iwl" id="8fT-Fe-WWO"/>
+                                                </connections>
+                                            </menuItem>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="chk_saveWallpapers" destination="QB7-I5-47K" id="OX8-Id-f5d"/>
-                        <outlet property="scheduleAmount" destination="eoD-Q1-fUd" id="FP4-7Y-afs"/>
+                        <outlet property="fiveMin" destination="OfI-nb-gHs" id="s5h-j4-VpP"/>
+                        <outlet property="oneMin" destination="HC2-9t-RZk" id="cVc-vs-MF4"/>
+                        <outlet property="scheduleOptions" destination="ilS-h4-Qr6" id="19c-wh-8MD"/>
+                        <outlet property="thirtySec" destination="mdv-lM-bvK" id="Chy-dF-5o7"/>
                         <outlet property="txt_keywords" destination="xWr-wT-SI3" id="Abl-BN-Q0e"/>
                     </connections>
                 </viewController>

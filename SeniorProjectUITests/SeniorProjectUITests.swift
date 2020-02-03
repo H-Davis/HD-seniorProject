@@ -55,79 +55,20 @@ class SeniorProjectUITests: XCTestCase {
     //        screenSize.click()
     //        screenSize.typeText("1440x900")
     
-    func testFolderIsCreatedOnClick(){
-        //setup
-        let window = XCUIApplication().windows["Window"]
-        let fileManager = FileManager.default
+    func testFolderExists(){
         let downloadsDirectory = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
-        let downloadsDirectoryString = downloadsDirectory.path
-        //create folder
-        window.buttons["Create Folder"].click()
-        //Assert that folder  was added on button click
-        XCTAssertTrue(fileManager.fileExists(atPath: downloadsDirectoryString))
+        let downloadsDirectoryWithFolder = downloadsDirectory.appendingPathComponent("UglyWallpapers")
+        XCTAssertTrue(fileExists(atPath: downloadsDirectoryWithFolder))
     }
     
-    func testFolderHasOnePhotoOnClick(){
-        //setup
-        let window = XCUIApplication().windows["Window"]
-        let fileManager = FileManager.default
-        let downloadsDirectory = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
-        let downloadsDirectoryFolder = downloadsDirectory.appendingPathComponent("UnsplashImages")
-        let downloadsDirectoryString = downloadsDirectoryFolder.path
-        //create folder
-        window.buttons["Create Folder"].click()
-        //Add photo to folder
-        window.buttons["Save Image"].click()
-        //Assert that folder  was added on button click
-        XCTAssertTrue(fileManager.fileExists(atPath: downloadsDirectoryString))
-    }
-    
-    func testPhotoIsSetAsBackgroundOnClick(){
-        //setup
-//        let window = XCUIApplication().windows["Window"]
-//        let fileManager = FileManager.default
-//        let downloadsDirectory = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
-//        let downloadsDirectoryFolder = downloadsDirectory.appendingPathComponent("UnsplashImages")
-//        let downloadsDirectoryString = downloadsDirectoryFolder.path
-//        let downloadsUrl:URL =  FileManager.default.homeDirectoryForCurrentUser
-//        let imagePath = "Downloads/UnsplashImages/newImage.jpg"
-//        let photoLocation = downloadsUrl.appendingPathComponent(imagePath)
-//        let photoLocationPath = photoLocation.path
-//        let screens = NSScreen.screens
-//        let workspace = NSWorkspace.shared
-//        //create folder
-//        window.buttons["Create Folder"].click()
-//        //Add photo to folder
-//        window.buttons["Save Image"].click()
-//        let photoPath = workspace.desktopImageURL(for: NSScreen?.main).path
-//        // Set as desktop background
-//        window.buttons["Apply"].click()
-//        //Assert that folder  was added on button click
-//        XCTAssertEqual(photoLocationPath, photoPath)
-    }
-    
-   
+    func testPhotoIsSaved(){
         
-    func testPhotoIsDeletedFromFolder(){
-        //setup
-        let window = XCUIApplication().windows["Window"]
-        let fileManager = FileManager.default
-        let downloadsDirectory = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
-        let downloadsDirectoryFolder = downloadsDirectory.appendingPathComponent("UnsplashImages")
-        let downloadsDirectoryString = downloadsDirectoryFolder.path
-        let didFinish = self.expectation(description: #function)
-        //create folder
-        window.buttons["Create Folder"].click()
-        //Add photo to folder
-        window.buttons["Save Image"].click()
-        //Set as background
-    
-        window.buttons["Apply"].click()
-        didFinish.fulfill()
-        wait(for: [didFinish], timeout: 5)
-        //Assert that file was deleted
-        XCTAssertFalse(fileManager.fileExists(atPath: downloadsDirectoryString))
     }
+    
+    func testPhotoIsSetAsBackground(){
+  
+    }
+    
     
     func testTextfieldIsCorrect(){
     }

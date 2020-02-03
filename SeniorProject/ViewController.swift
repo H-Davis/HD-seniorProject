@@ -4,21 +4,18 @@
 //
 //  Created by Hananiah Davis on 10/21/19.
 //  Copyright © 2019 HananiahDavis. All rights reserved.
-//
-
+//la
 import Cocoa
 import AppKit
 
 class ViewController: NSViewController {
     @IBOutlet weak var txt_keywords: NSTextField!
     @IBOutlet weak var chk_saveWallpapers: NSButton!
-    @IBOutlet weak var scheduleAmount: NSTextField!
+    @IBOutlet weak var scheduleOptions: NSPopUpButton!
+    @IBOutlet weak var thirtySec: NSMenuItem!
+    @IBOutlet weak var oneMin: NSMenuItem!
+    @IBOutlet weak var fiveMin: NSMenuItem!
     var wallpaperTimer = Timer()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.timerSetter()
-    }
     
     func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear()
@@ -30,6 +27,8 @@ class ViewController: NSViewController {
         self.retrieveImage(imagePath: rootPath) { result in
             self.setAsBackground(imagePath: result)
         }
+        
+        self.initializeTimer()
     }
     
     func getTempLocation() -> URL? {
@@ -45,6 +44,7 @@ class ViewController: NSViewController {
     }
     
     func getSaveLocation() -> URL? {
+        self.createFolder()
         do  {
             let url = try FileManager.default.url(for: .downloadsDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             return url.appendingPathComponent("UglyWallpapers");
@@ -107,21 +107,31 @@ class ViewController: NSViewController {
         }
     }
     
-    func timerSetter(){
-        wallpaperTimer = Timer.scheduledTimer(timeInterval: TimeInterval(setSchedule(scheduleAmount: scheduleAmount)), target: self, selector: #selector(apply(_:)), userInfo: nil, repeats: true)
+    func initializeTimer() {
+        if (wallpaperTimer.isValid) {
+            wallpaperTimer.invalidate();
+        }
+        
+        wallpaperTimer = Timer.scheduledTimer(timeInterval: TimeInterval(self.getSwitchInterval(scheduleOptions: self.scheduleOptions)), target: self, selector: #selector(apply(_:)), userInfo: nil, repeats: false)
     }
     
-    func setSchedule(scheduleAmount: NSTextField) -> Int {
-        let numString = scheduleAmount.stringValue as NSString
-        let num = numString.doubleValue
-        return Int(num)
+    func getSwitchInterval(scheduleOptions: NSPopUpButton) -> Int {
+        let minAmount = scheduleOptions.indexOfSelectedItem
+        switch minAmount {
+            case 0:
+                return 30
+            case 1:
+                return 60
+            case 2:
+                return 300
+            default:
+                return 20
+        }
     }
     
-    
-    
-    /*func createFolder() {
+    func createFolder() {
         let downloadsDirectory = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
-        let downloadsDirectoryWithFolder = downloadsDirectory.appendingPathComponent("UnsplashImages")
+        let downloadsDirectoryWithFolder = downloadsDirectory.appendingPathComponent("UglyWallpapers")
 
         do {
             try FileManager.default.createDirectory(at: downloadsDirectoryWithFolder, withIntermediateDirectories: true, attributes: nil)
@@ -129,10 +139,7 @@ class ViewController: NSViewController {
             print(error.localizedDescription)
         }
     }
-    */
-    //    wallpaperTimer = Timer.scheduledTimer(timeInterval: TimeInterval(setSchedule(scheduledTimed: scheduledTimed)), target: self, selector: #selector(apply(_:)), userInfo: nil, repeats: true)
-    
-    
+
 }
 
 
