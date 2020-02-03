@@ -18,6 +18,10 @@ class ViewController: NSViewController {
     @IBOutlet weak var fiveMin: NSMenuItem!
     var wallpaperTimer = Timer()
     
+    override func viewDidAppear() {
+        self.view.window?.styleMask.remove(NSWindow.StyleMask.resizable)
+    }
+    
     func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear()
         wallpaperTimer.invalidate()
