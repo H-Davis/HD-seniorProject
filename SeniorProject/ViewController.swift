@@ -135,13 +135,16 @@ class ViewController: NSViewController {
         let minAmount = scheduleOptions.indexOfSelectedItem
         switch minAmount {
             case 0:
-                return 5
+                //return 30
+                return 5 //Should be returning 30 for 30 secs, but For Demo Day these are set to shorter time intervals
             case 1:
-                return 10
+                //return 60
+                return 10 ////Should be returning 60 for 1 minute, but For Demo Day these are set to shorter time intervals
             case 2:
-                return 15
+                //return 300 
+                return 15 //Should be returning 300 for 5 minutes, but For Demo Day these are set to shorter time intervals
             default:
-                return 20
+                return 1800 //Default time interval is 30 minutes
         }
     }
     
